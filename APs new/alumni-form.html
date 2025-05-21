@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Registration - APS Rewa University</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="images/logo.png" alt="APS Rewa University Logo">
+            <span>APS Rewa University</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="teachers.html">Teachers</a>
+            <a href="alumni-form.html" class="active">Alumni Registration</a>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Alumni Registration Form -->
+    <div class="form-container">
+        <h2>Alumni Registration Form</h2>
+        <p class="form-description">Join our alumni network and stay connected with your alma mater.</p>
+        
+        <form id="alumniForm" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}">
+            </div>
+
+            <div class="form-group">
+                <label for="department">Department *</label>
+                <select id="department" name="department" required>
+                    <option value="">Select Department</option>
+                    <option value="computer-science">Computer Science</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="mechanical">Mechanical</option>
+                    <option value="civil">Civil</option>
+                    <option value="electrical">Electrical</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="batch">Batch/Year *</label>
+                <input type="number" id="batch" name="batch" required min="2000" max="2024">
+            </div>
+
+            <div class="form-group">
+                <label for="organization">Current Organization</label>
+                <input type="text" id="organization" name="organization">
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea id="address" name="address" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message (Optional)</label>
+                <textarea id="message" name="message" rows="4"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="photo">Upload Photo (Optional)</label>
+                <input type="file" id="photo" name="photo" accept="image/*">
+                <img id="photoPreview" src="#" alt="Photo Preview" style="display: none; max-width: 200px; margin-top: 10px;">
+            </div>
+
+            <div class="loader"></div>
+            <button type="submit" class="submit-btn">Submit Registration</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Rewa, Madhya Pradesh</p>
+                <p><i class="fas fa-phone"></i> +91 XXXXXXXXXX</p>
+                <p><i class="fas fa-envelope"></i> info@apsrewa.edu.in</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="about.html">About Us</a>
+                <a href="teachers.html">Faculty</a>
+                <a href="alumni-form.html">Alumni Registration</a>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 APS Rewa University. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // IMPORTANT: Replace this with your actual Google Apps Script Web App URL
+        // The URL should look like: https://script.google.com/macros/s/AKfycbz.../exec
+        // This is NOT your Google Sheet ID
+        const SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_ACTUAL_DEPLOYMENT_ID/exec';
+
+        // Form submission handling
+        const alumniForm = document.getElementById('alumniForm');
+        const loader = document.querySelector('.loader');
+        const submitBtn = document.querySelector('.submit-btn');
+
+        // Add this debug function
+        async function testScriptConnection() {
+            try {
+                console.log('Testing script connection...');
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
+                console.log('Script test response:', data);
+                return data.status === 'success';
+            } catch (error) {
+                console.error('Script connection test failed:', error);
+                return false;
+            }
+        }
+
+        alumniForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Test script connection first
+            if (!await testScriptConnection()) {
+                showToast('Cannot connect to the server. Please check your internet connection or contact administrator.', 'error');
+                return;
+            }
+
+            if (!validateForm()) {
+                showToast('Please fill all required fields correctly', 'error');
+                return;
+            }
+
+            // Show loader and disable submit button
+            loader.style.display = 'block';
+            submitBtn.disabled = true;
+
+            try {
+                // Debug log
+                console.log('Starting form submission...');
+                console.log('Script URL:', SCRIPT_URL);
+                
+                // Get form data
+                const formData = new FormData(alumniForm);
+                const data = {
+                    formType: 'ALUMNI',
+                    timestamp: new Date().toISOString(),
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    department: formData.get('department'),
+                    batch: formData.get('batch'),
+                    organization: formData.get('organization') || '',
+                    address: formData.get('address') || '',
+                    message: formData.get('message') || ''
+                };
+
+                // Debug log
+                console.log('Form data prepared:', data);
+
+                // Handle photo upload if present
+                const photoFile = formData.get('photo');
+                if (photoFile && photoFile.size > 0) {
+                    console.log('Processing photo upload...');
+                    const base64Image = await convertImageToBase64(photoFile);
+                    data.photo = base64Image;
+                    data.photoName = photoFile.name;
+                }
+
+                // Send data to Google Apps Script with detailed error handling
+                console.log('Sending POST request to:', SCRIPT_URL);
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Add this to handle CORS
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                // Debug log
+                console.log('Response status:', response.status);
+                console.log('Response type:', response.type);
+                
+                if (response.type === 'opaque') {
+                    // Handle no-cors response
+                    showToast('Registration submitted! Please check your email for confirmation.', 'success');
+                    alumniForm.reset();
+                    const photoPreview = document.getElementById('photoPreview');
+                    if (photoPreview) {
+                        photoPreview.style.display = 'none';
+                        photoPreview.src = '';
+                    }
+                } else {
+                    const result = await response.json();
+                    console.log('Response data:', result);
+
+                    if (result.status === 'success') {
+                        showToast('Registration submitted successfully! We will contact you soon.', 'success');
+                        alumniForm.reset();
+                        const photoPreview = document.getElementById('photoPreview');
+                        if (photoPreview) {
+                            photoPreview.style.display = 'none';
+                            photoPreview.src = '';
+                        }
+                    } else {
+                        throw new Error(result.message || 'Failed to submit registration');
+                    }
+                }
+            } catch (error) {
+                console.error('Error details:', error);
+                console.error('Error stack:', error.stack);
+                showToast('Failed to submit registration. Please try again later.', 'error');
+            } finally {
+                // Hide loader and enable submit button
+                loader.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Add this function to check if the script URL is set
+        function checkScriptURL() {
+            if (SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') {
+                console.error('Error: Google Apps Script URL not configured!');
+                showToast('Form submission is not configured. Please contact administrator.', 'error');
+                return false;
+            }
+            return true;
+        }
+
+        // Update form submission to check URL first
+        alumniForm.addEventListener('submit', async (e) => {
+            if (!checkScriptURL()) {
+                e.preventDefault();
+                return;
+            }
+        });
+
+        // Convert image to base64
+        function convertImageToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Form validation
+        function validateForm() {
+            const requiredFields = ['name', 'email', 'phone', 'department', 'batch'];
+            let isValid = true;
+
+            // Validate required fields
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim()) {
+                    field.classList.add('error');
+                    isValid = false;
+                } else {
+                    field.classList.remove('error');
+                }
+            });
+
+            // Validate email format
+            const emailField = document.getElementById('email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailField.value.trim() && !emailRegex.test(emailField.value.trim())) {
+                emailField.classList.add('error');
+                isValid = false;
+            }
+
+            // Validate phone format (10 digits)
+            const phoneField = document.getElementById('phone');
+            const phoneRegex = /^[0-9]{10}$/;
+            if (phoneField.value.trim() && !phoneRegex.test(phoneField.value.trim())) {
+                phoneField.classList.add('error');
+                isValid = false;
+            }
+
+            // Validate batch year (between 2000 and current year)
+            const batchField = document.getElementById('batch');
+            const currentYear = new Date().getFullYear();
+            const batchYear = parseInt(batchField.value);
+            if (batchYear < 2000 || batchYear > currentYear) {
+                batchField.classList.add('error');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // Show toast message
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            // Trigger animation
+            setTimeout(() => toast.classList.add('show'), 100);
+
+            // Remove toast after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Photo preview
+        const photoInput = document.getElementById('photo');
+        const photoPreview = document.getElementById('photoPreview');
+        
+        if (photoInput && photoPreview) {
+            photoInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    // Validate file type
+                    if (!file.type.startsWith('image/')) {
+                        showToast('Please select an image file', 'error');
+                        photoInput.value = '';
+                        return;
+                    }
+
+                    // Validate file size (max 5MB)
+                    if (file.size > 5 * 1024 * 1024) {
+                        showToast('Image size should be less than 5MB', 'error');
+                        photoInput.value = '';
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        photoPreview.src = e.target.result;
+                        photoPreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    photoPreview.style.display = 'none';
+                    photoPreview.src = '';
+                }
+            });
+        }
+
+        // Add validation on input
+        const formInputs = alumniForm.querySelectorAll('input, select, textarea');
+        formInputs.forEach(input => {
+            input.addEventListener('input', () => {
+                input.classList.remove('error');
+            });
+        });
+    </script>
+</body>
+</html> 

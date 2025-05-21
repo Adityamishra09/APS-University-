@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty - APS Rewa University</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .teachers-section {
+            padding: 8rem 5% 4rem;
+            background: #f9f9f9;
+            overflow: hidden;
+        }
+
+        .teachers-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        .teachers-grid {
+            display: flex;
+            gap: 2rem;
+            animation: scroll 30s linear infinite;
+            width: max-content;
+        }
+
+        .teachers-grid:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-300px * 9 - 2rem * 9));
+            }
+        }
+
+        .teacher-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            width: 300px;
+            flex-shrink: 0;
+        }
+
+        .teacher-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .teacher-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .teacher-info {
+            padding: 1.5rem;
+        }
+
+        .teacher-info h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .teacher-info .designation {
+            color: #3498db;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .teacher-info .department {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .teacher-info .bio {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title h2 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .scroll-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .scroll-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .scroll-btn:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="images/logo.png" alt="APS Rewa University Logo">
+            <span>APS Rewa University</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="teachers.html" class="active">Teachers</a>
+            <a href="alumni-form.html">Alumni Registration</a>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Teachers Section -->
+    <section class="teachers-section">
+        <div class="section-title">
+            <h2>Our Faculty</h2>
+            <p>Meet our experienced and dedicated faculty members who are committed to excellence in education.</p>
+        </div>
+
+        <div class="teachers-container">
+            <div class="teachers-grid">
+                <!-- Teacher 1 -->
+                <div class="teacher-card">
+                    <img src="images/teacher1.jpg" alt="Dr. Rajesh Kumar" class="teacher-image">
+                    <div class="teacher-info">
+                        <h3>Dr. Rajesh Kumar</h3>
+                        <p class="designation">Professor & Head</p>
+                        <p class="department">Department of Computer Science</p>
+                        <p class="bio">Ph.D. in Computer Science with 15+ years of teaching experience. Specializes in Artificial Intelligence and Machine Learning.</p>
+                    </div>
+                </div>
+
+                <!-- Teacher 2 -->
+                <div class="teacher-card">
+                    <img src="images/teacher2.jpg" alt="Dr. Priya Sharma" class="teacher-image">
+                    <div class="teacher-info">
+                        <h3>Dr. Priya Sharma</h3>
+                        <p class="designation">Associate Professor</p>
+                        <p class="department">Department of Electronics</p>
+                        <p class="bio">Expert in VLSI Design and Digital Electronics. Published numerous research papers in international journals.</p>
+                    </div>
+                </div>
+
+                <!-- Teacher 3 -->
+                <div class="teacher-card">
+                    <img src="images/teacher3.jpg" alt="Prof. Amit Patel" class="teacher-image">
+                    <div class="teacher-info">
+                        <h3>Prof. Amit Patel</h3>
+                        <p class="designation">Assistant Professor</p>
+                        <p class="department">Department of Mechanical Engineering</p>
+                        <p class="bio">Specializes in Thermal Engineering and Fluid Mechanics. Active researcher in renewable energy systems.</p>
+                    </div>
+                </div>
+
+                <!-- Teacher 4 -->
+                <div class="teacher-card">
+                    <img src="images/teacher4.jpg" alt="Dr. Neha Gupta" class="teacher-image">
+                    <div class="teacher-info">
+                        <h3>Dr. Neha Gupta</h3>
+                        <p class="designation">Associate Professor</p>
+                        <p class="department">Department of Civil Engineering</p>
+                        <p class="bio">Expert in Structural Engineering and Environmental Science. Leads multiple research projects.</p>
+                    </div>
+                </div>
+
+                <!-- Teacher 5 -->
+                <div class="teacher-card">
+                    <img src="images/teacher5.jpg" alt="Prof. Rahul Verma" class="teacher-image">
+                    <div class="teacher-info">
+                        <h3>Prof. Rahul Verma</h3>
+                        <p class="designation">Assistant Professor</p>
+                        <p class="department">Department of Electrical Engineering</p>
+                        <p class="bio">Specializes in Power Systems and Control Engineering. Industry experience with leading power companies.</p>
+                    </div>
+                </div>
+
+                <!-- Teacher 6 -->
+                <div class="teacher-card">
+                    <img src="images/teacher6.jpg" alt="Dr. Sunita Singh" class="teacher-image">
+                    <div class="teacher-info">
+                        <h3>Dr. Sunita Singh</h3>
+                        <p class="designation">Professor</p>
+                        <p class="department">Department of Computer Science</p>
+                        <p class="bio">Expert in Data Science and Big Data Analytics. Published author and conference speaker.</p>
+                    </div>
+                </div>
+
+                <!-- Teacher 7 -->
+                <div class="teacher-card">
+                    <img src="images/teacher7.jpg" alt="Dr. Vikram Malhotra" class="teacher-image">
+                    <div class="teacher-info">
+                        <h3>Dr. Vikram Malhotra</h3>
+                        <p class="designation">Professor</p>
+                        <p class="department">Department of Electronics</p>
+                        <p class="bio">Specializes in Communication Systems and Signal Processing. Awarded for outstanding research contributions.</p>
+                    </div>
+                </div>
+
+                <!-- Teacher 8 -->
+                <div class="teacher-card">
+                    <img src="images/teacher8.jpg" alt="Dr. Anjali Desai" class="teacher-image">
+                    <div class="teacher-info">
+                        <h3>Dr. Anjali Desai</h3>
+                        <p class="designation">Associate Professor</p>
+                        <p class="department">Department of Mechanical Engineering</p>
+                        <p class="bio">Expert in Robotics and Automation. Leads the university's robotics research lab.</p>
+                    </div>
+                </div>
+
+                <!-- Teacher 9 -->
+                <div class="teacher-card">
+                    <img src="images/teacher9.jpg" alt="Prof. Karan Mehta" class="teacher-image">
+                    <div class="teacher-info">
+                        <h3>Prof. Karan Mehta</h3>
+                        <p class="designation">Assistant Professor</p>
+                        <p class="department">Department of Civil Engineering</p>
+                        <p class="bio">Specializes in Sustainable Construction and Green Building Technologies.</p>
+                    </div>
+                </div>
+
+                <!-- Duplicate cards for seamless scrolling -->
+                <!-- Teacher 1 (Duplicate) -->
+                <div class="teacher-card">
+                    <img src="images/teacher1.jpg" alt="Dr. Rajesh Kumar" class="teacher-image">
+                    <div class="teacher-info">
+                        <h3>Dr. Rajesh Kumar</h3>
+                        <p class="designation">Professor & Head</p>
+                        <p class="department">Department of Computer Science</p>
+                        <p class="bio">Ph.D. in Computer Science with 15+ years of teaching experience. Specializes in Artificial Intelligence and Machine Learning.</p>
+                    </div>
+                </div>
+
+                <!-- Teacher 2 (Duplicate) -->
+                <div class="teacher-card">
+                    <img src="images/teacher2.jpg" alt="Dr. Priya Sharma" class="teacher-image">
+                    <div class="teacher-info">
+                        <h3>Dr. Priya Sharma</h3>
+                        <p class="designation">Associate Professor</p>
+                        <p class="department">Department of Electronics</p>
+                        <p class="bio">Expert in VLSI Design and Digital Electronics. Published numerous research papers in international journals.</p>
+                    </div>
+                </div>
+
+                <!-- Teacher 3 (Duplicate) -->
+                <div class="teacher-card">
+                    <img src="images/teacher3.jpg" alt="Prof. Amit Patel" class="teacher-image">
+                    <div class="teacher-info">
+                        <h3>Prof. Amit Patel</h3>
+                        <p class="designation">Assistant Professor</p>
+                        <p class="department">Department of Mechanical Engineering</p>
+                        <p class="bio">Specializes in Thermal Engineering and Fluid Mechanics. Active researcher in renewable energy systems.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-controls">
+            <button class="scroll-btn" onclick="pauseScroll()">Pause</button>
+            <button class="scroll-btn" onclick="resumeScroll()">Resume</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Rewa, Madhya Pradesh</p>
+                <p><i class="fas fa-phone"></i> +91 XXXXXXXXXX</p>
+                <p><i class="fas fa-envelope"></i> info@apsrewa.edu.in</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="about.html">About Us</a>
+                <a href="teachers.html">Faculty</a>
+                <a href="alumni-form.html">Alumni Registration</a>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 APS Rewa University. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Add this to your existing script
+        function pauseScroll() {
+            const grid = document.querySelector('.teachers-grid');
+            grid.style.animationPlayState = 'paused';
+        }
+
+        function resumeScroll() {
+            const grid = document.querySelector('.teachers-grid');
+            grid.style.animationPlayState = 'running';
+        }
+    </script>
+</body>
+</html> 
